@@ -9,6 +9,7 @@ import java.util.List;
 
 import conexaojdbc.Conexao;
 import model.Pessoa;
+import model.Telefone;
 
 public class PessoaDao {
 
@@ -38,6 +39,32 @@ public class PessoaDao {
 		}
 	}
 
+	public void salvarTelefone(Telefone telefone) {
+
+		try {
+
+			String sql = "insert into telefone (numero, tipo, usuariopessoa) values (?,?,?)";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, telefone.getNumero());
+			statement.setString(2, telefone.getTipo());
+			statement.setLong(3, telefone.getUsuario());
+			statement.execute(); // SQL sendo executado no banco
+			connection.commit();
+			
+			
+		} catch (Exception e) {
+			
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		
+		}
+
+	}
+
 	public List<Pessoa> listar() throws SQLException {
 
 		List<Pessoa> list = new ArrayList<Pessoa>();
@@ -63,7 +90,7 @@ public class PessoaDao {
 	public Pessoa buscarPessoa(Long id) throws SQLException {
 
 		Pessoa pessoa = new Pessoa();
-		
+
 		String sql = "select * from pessoa where id = " + id;
 		PreparedStatement buscar = connection.prepareStatement(sql);
 
@@ -79,22 +106,19 @@ public class PessoaDao {
 
 		return pessoa;
 	}
-	
+
 	public void atualizar(Pessoa pessoa) {
-		
-		
+
 		try {
-		
+
 			String sql = "update pessoa set nome = ? , email = ? where id = " + pessoa.getId();
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, pessoa.getNome());
 			statement.setString(2, pessoa.getEmail());
-			
+
 			statement.execute();
 			connection.commit();
-			
-			
-			
+
 		} catch (Exception e) {
 			try {
 				connection.rollback();
@@ -103,51 +127,29 @@ public class PessoaDao {
 			}
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 	public void deletar(Long id) {
-		
+
 		try {
-			
+
 			String sql = "delete from pessoa where id = " + id;
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.execute();
 			connection.commit();
-			
+
 		} catch (Exception e) {
-			
+
 			try {
 				connection.rollback();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
-			
+
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,8 +7,9 @@ import org.junit.Test;
 import conexaojdbc.Conexao;
 import dao.PessoaDao;
 import model.Pessoa;
+import model.Telefone;
 
-public class TesteConexaoBanco {
+public class TesteMetodos {
 
 	@Test
 	public void iniciarBanco() {
@@ -72,6 +73,20 @@ public class TesteConexaoBanco {
 	public void deletar() {
 		PessoaDao  dao = new PessoaDao();
 		dao.deletar(5L);
+	}
+	
+	@Test
+	public void salvarTelefone() {
+		
+		Telefone telefone = new Telefone();
+		telefone.setNumero("88 8888 8888");
+		telefone.setTipo("celular");
+		telefone.setUsuario(8L);
+		
+		PessoaDao dao = new PessoaDao();
+		dao.salvarTelefone(telefone);
+		
+		
 	}
 }
 
