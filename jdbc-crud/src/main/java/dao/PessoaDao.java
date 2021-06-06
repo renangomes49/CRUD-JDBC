@@ -80,5 +80,52 @@ public class PessoaDao {
 
 		return pessoa;
 	}
+	
+	public void atualizar(Pessoa pessoa) {
+		
+		
+		try {
+		
+			String sql = "update pessoa set nome = ? , email = ? where id = " + pessoa.getId();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, pessoa.getNome());
+			statement.setString(2, pessoa.getEmail());
+			
+			statement.execute();
+			connection.commit();
+			
+			
+			
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

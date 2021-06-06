@@ -14,35 +14,35 @@ public class TesteConexaoBanco {
 	public void iniciarBanco() {
 		Conexao.geConnection();
 	}
-	
+
 	@Test
 	public void salvarBanco() {
-		
+
 		Pessoa pessoa = new Pessoa();
 		pessoa.setId(4L);
 		pessoa.setNome("Jose Bezerra Silva");
 		pessoa.setEmail("josebez@gmail.com");
-		
+
 		PessoaDao dao = new PessoaDao();
 		dao.salvar(pessoa);
 	}
-	
+
 	@Test
 	public void listar() throws SQLException {
-		
+
 		PessoaDao dao = new PessoaDao();
-		
+
 		List<Pessoa> list = dao.listar();
-		
+
 		for (Pessoa pessoa : list) {
 			System.out.println(pessoa);
 		}
-		
+
 	}
-	
+
 	@Test
 	public void buscarPessoa() {
-		
+
 		try {
 			PessoaDao dao = new PessoaDao();
 			Pessoa pessoa = dao.buscarPessoa(1L);
@@ -52,20 +52,20 @@ public class TesteConexaoBanco {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void atualizarPessoa() {
+
+		try {
+			PessoaDao dao = new PessoaDao();
+			Pessoa pessoa = dao.buscarPessoa(1L);
+			pessoa.setNome("Renan M");
+			pessoa.setEmail("renan@gmail.com");
+			dao.atualizar(pessoa);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
