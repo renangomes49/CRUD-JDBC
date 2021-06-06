@@ -19,9 +19,8 @@ public class TesteConexaoBanco {
 	public void salvarBanco() {
 
 		Pessoa pessoa = new Pessoa();
-		pessoa.setId(4L);
-		pessoa.setNome("Jose Bezerra Silva");
-		pessoa.setEmail("josebez@gmail.com");
+		pessoa.setNome("Carlos ferreira");
+		pessoa.setEmail("carlos@.com.br");
 
 		PessoaDao dao = new PessoaDao();
 		dao.salvar(pessoa);

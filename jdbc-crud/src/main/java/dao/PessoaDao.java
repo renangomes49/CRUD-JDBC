@@ -21,11 +21,10 @@ public class PessoaDao {
 	public void salvar(Pessoa pessoa) {
 
 		try {
-			String sql = "insert into pessoa (id, nome, email) values (? , ? , ?)";
+			String sql = "insert into pessoa (nome, email) values ( ? , ?)";
 			PreparedStatement insert = connection.prepareStatement(sql);
-			insert.setLong(1, pessoa.getId());
-			insert.setString(2, pessoa.getNome());
-			insert.setString(3, pessoa.getEmail());
+			insert.setString(1, pessoa.getNome());
+			insert.setString(2, pessoa.getEmail());
 			insert.execute();
 			connection.commit(); // salvar dados no banco
 
