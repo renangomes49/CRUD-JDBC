@@ -2,8 +2,6 @@ package jdbc_crud.jdbc_crud;
 
 import java.util.List;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 import conexaojdbc.Conexao;
@@ -40,6 +38,19 @@ public class TesteConexaoBanco {
 			System.out.println(pessoa);
 		}
 		
+	}
+	
+	@Test
+	public void buscarPessoa() {
+		
+		try {
+			PessoaDao dao = new PessoaDao();
+			Pessoa pessoa = dao.buscarPessoa(1L);
+			System.out.println(pessoa);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
 

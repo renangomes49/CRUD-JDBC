@@ -13,14 +13,13 @@ import model.Pessoa;
 public class PessoaDao {
 
 	private Connection connection;
-	
+
 	public PessoaDao() {
 		connection = Conexao.geConnection();
 	}
-	
+
 	public void salvar(Pessoa pessoa) {
-		
-		
+
 		try {
 			String sql = "insert into pessoa (id, nome, email) values (? , ? , ?)";
 			PreparedStatement insert = connection.prepareStatement(sql);
@@ -28,8 +27,8 @@ public class PessoaDao {
 			insert.setString(2, pessoa.getNome());
 			insert.setString(3, pessoa.getEmail());
 			insert.execute();
-			connection.commit(); //salvar dados no banco
-			
+			connection.commit(); // salvar dados no banco
+
 		} catch (SQLException e) {
 			try {
 				connection.rollback(); // reverte operação caso tenha erro
@@ -39,53 +38,47 @@ public class PessoaDao {
 			e.printStackTrace();
 		}
 	}
-	
-	public List<Pessoa> listar() throws SQLException{
-		
+
+	public List<Pessoa> listar() throws SQLException {
+
 		List<Pessoa> list = new ArrayList<Pessoa>();
-		
+
 		String sql = "select * from pessoa";
 		PreparedStatement listar = connection.prepareStatement(sql);
-		
+
 		ResultSet resultado = listar.executeQuery();
-		
-		while(resultado.next()) {
+
+		while (resultado.next()) {
 			Pessoa pessoa = new Pessoa();
-			
+
 			pessoa.setId(resultado.getLong("id"));
 			pessoa.setNome(resultado.getString("nome"));
 			pessoa.setEmail(resultado.getString("email"));
-			
+
 			list.add(pessoa);
 		}
-		
-		
+
 		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public Pessoa buscarPessoa(Long id) throws SQLException {
+
+		Pessoa pessoa = new Pessoa();
+		
+		String sql = "select * from pessoa where id = " + id;
+		PreparedStatement buscar = connection.prepareStatement(sql);
+
+		ResultSet resultado = buscar.executeQuery();
+
+		while (resultado.next()) {
+
+			pessoa.setId(resultado.getLong("id"));
+			pessoa.setNome(resultado.getString("nome"));
+			pessoa.setEmail(resultado.getString("email"));
+
+		}
+
+		return pessoa;
+	}
+
 }
