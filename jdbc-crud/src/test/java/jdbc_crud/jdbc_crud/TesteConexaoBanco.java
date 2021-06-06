@@ -67,4 +67,17 @@ public class TesteConexaoBanco {
 		}
 
 	}
+	
+	@Test
+	public void deletar() {
+		PessoaDao  dao = new PessoaDao();
+		dao.deletar(5L);
+	}
 }
+
+
+
+
+
+
+
