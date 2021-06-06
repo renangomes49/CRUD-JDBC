@@ -4,7 +4,7 @@ public class Pessoa {
 
 	private Long id;
 	private String nome;
-	private String pessoa;
+	private String email;
 
 	
 
@@ -16,12 +16,12 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public String getPessoa() {
-		return pessoa;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setPessoa(String pessoa) {
-		this.pessoa = pessoa;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Long getId() {
