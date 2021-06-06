@@ -1,5 +1,9 @@
 package jdbc_crud.jdbc_crud;
 
+import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import conexaojdbc.Conexao;
@@ -23,7 +27,34 @@ public class TesteConexaoBanco {
 		
 		PessoaDao dao = new PessoaDao();
 		dao.salvar(pessoa);
+	}
+	
+	@Test
+	public void listar() throws SQLException {
 		
+		PessoaDao dao = new PessoaDao();
+		
+		List<Pessoa> list = dao.listar();
+		
+		for (Pessoa pessoa : list) {
+			System.out.println(pessoa);
+		}
 		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

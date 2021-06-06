@@ -2,6 +2,7 @@ package model;
 
 public class Pessoa {
 
+
 	private Long id;
 	private String nome;
 	private String email;
@@ -31,5 +32,11 @@ public class Pessoa {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@Override
+	public String toString() {
+		return "Pessoa [id=" + id + ", nome=" + nome + ", email=" + email + "]";
+	}
+
 
 }

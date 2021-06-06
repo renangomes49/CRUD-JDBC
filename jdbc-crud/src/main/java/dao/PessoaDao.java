@@ -2,7 +2,10 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import conexaojdbc.Conexao;
 import model.Pessoa;
@@ -36,5 +39,53 @@ public class PessoaDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<Pessoa> listar() throws SQLException{
+		
+		List<Pessoa> list = new ArrayList<Pessoa>();
+		
+		String sql = "select * from pessoa";
+		PreparedStatement listar = connection.prepareStatement(sql);
+		
+		ResultSet resultado = listar.executeQuery();
+		
+		while(resultado.next()) {
+			Pessoa pessoa = new Pessoa();
+			
+			pessoa.setId(resultado.getLong("id"));
+			pessoa.setNome(resultado.getString("nome"));
+			pessoa.setEmail(resultado.getString("email"));
+			
+			list.add(pessoa);
+		}
+		
+		
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
