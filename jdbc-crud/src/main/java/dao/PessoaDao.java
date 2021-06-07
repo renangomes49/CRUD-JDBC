@@ -180,4 +180,34 @@ public class PessoaDao {
 
 	}
 
+	// método deletar em cascata
+	// quando uma pessoa está associado a uma tabela
+	public void deletarFonesUsers(Long idPessoa) {
+
+		try {
+
+			String sqlFone = "delete from telefone where usuariopessoa = " + idPessoa;
+			String sqlPessoa = "delete from pessoa where id = " + idPessoa;
+
+			PreparedStatement statement = connection.prepareStatement(sqlFone);
+			statement.executeUpdate();
+			connection.commit();
+			
+			statement = connection.prepareStatement(sqlPessoa);
+			statement.executeUpdate();
+			connection.commit();
+		
+		} catch (Exception e) {
+ 
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		
+		}
+
+	}
+
 }

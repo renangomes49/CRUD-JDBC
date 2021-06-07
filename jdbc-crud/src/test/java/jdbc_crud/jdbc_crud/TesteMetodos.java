@@ -28,6 +28,7 @@ public class TesteMetodos {
 		dao.salvar(pessoa);
 	}
 
+	// teste para listar pessoas 
 	@Test
 	public void listar() throws SQLException {
 
@@ -90,6 +91,7 @@ public class TesteMetodos {
 		
 	}
 	
+	// teste para retornar usuário com os seus telefones associados
 	@Test
 	public void retornoFoneUsuarios() {
 		
@@ -101,6 +103,16 @@ public class TesteMetodos {
 		}
 		
 	}
+	
+	// teste para exclusao de dados em cascata
+	@Test
+	public void deleteUserFone() {
+		
+		PessoaDao dao = new PessoaDao();
+		dao.deletarFonesUsers(8L);
+		
+	}
+	
 }
 
 
