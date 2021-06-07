@@ -7,6 +7,7 @@ import org.junit.Test;
 import conexaojdbc.Conexao;
 import dao.PessoaDao;
 import model.Pessoa;
+import model.PessoaTelefone;
 import model.Telefone;
 
 public class TesteMetodos {
@@ -86,6 +87,18 @@ public class TesteMetodos {
 		PessoaDao dao = new PessoaDao();
 		dao.salvarTelefone(telefone);
 		
+		
+	}
+	
+	@Test
+	public void retornoFoneUsuarios() {
+		
+		PessoaDao dao = new PessoaDao();
+		List<PessoaTelefone> lista = dao.listarUserFone(8L);
+		
+		for (PessoaTelefone pessoaTelefone : lista) {
+			System.out.println(pessoaTelefone);
+		}
 		
 	}
 }

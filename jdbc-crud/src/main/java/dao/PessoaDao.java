@@ -9,6 +9,7 @@ import java.util.List;
 
 import conexaojdbc.Conexao;
 import model.Pessoa;
+import model.PessoaTelefone;
 import model.Telefone;
 
 public class PessoaDao {
@@ -50,17 +51,16 @@ public class PessoaDao {
 			statement.setLong(3, telefone.getUsuario());
 			statement.execute(); // SQL sendo executado no banco
 			connection.commit();
-			
-			
+
 		} catch (Exception e) {
-			
+
 			try {
 				connection.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
-		
+
 		}
 
 	}
@@ -107,7 +107,34 @@ public class PessoaDao {
 		return pessoa;
 	}
 
-	
+	// método para o inner join entre as classes Pessoa e Telefonoe
+	public List<PessoaTelefone> listarUserFone(Long idPessoa) {
+
+		List<PessoaTelefone> lista = new ArrayList<PessoaTelefone>();
+
+		try {
+
+			String sql = "select nome, email, numero from pessoa, telefone "
+					+ " where pessoa.id = telefone.usuariopessoa " + "and pessoa.id = " + idPessoa;
+
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultado = statement.executeQuery();
+
+			while (resultado.next()) {
+				PessoaTelefone pessoaTelefone = new PessoaTelefone();
+				pessoaTelefone.setNome(resultado.getString("nome"));
+				pessoaTelefone.setEmail(resultado.getString("email"));
+				pessoaTelefone.setNumero(resultado.getString("numero"));
+				lista.add(pessoaTelefone);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+
 	public void atualizar(Pessoa pessoa) {
 
 		try {
